@@ -1,4 +1,4 @@
-import { addDays, differenceInHours, parseISO, startOfWeek } from 'date-fns'
+import { differenceInHours, parseISO } from 'date-fns'
 import type { Exercise, Session, SetLog } from '@/db/models'
 import { db } from '@/db/database'
 
@@ -126,19 +126,4 @@ export async function buildNextMenuSuggestions(): Promise<SuggestedExercise[]> {
   return result
 }
 
-export function weekDots(sessions: Session[], weekStart: Date): boolean[] {
-  const dots: boolean[] = []
-  for (let i = 0; i < 7; i++) {
-    const d = addDays(weekStart, i)
-    const key = d.toISOString().slice(0, 10)
-    const hit = sessions.some(
-      (s) => s.completedAt && s.date.slice(0, 10) === key,
-    )
-    dots.push(hit)
-  }
-  return dots
-}
 
-export function currentWeekStart(): Date {
-  return startOfWeek(new Date(), { weekStartsOn: 1 })
-}
