@@ -10,6 +10,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
+      // 開発中は Service Worker を無効化（古いキャッシュで UI が更新されないのを防ぐ）
+      devOptions: { enabled: false },
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
