@@ -6,11 +6,15 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    port: 5174,
+    strictPort: true,
+    host: true,
+  },
   plugins: [
     react(),
     tailwindcss(),
     VitePWA({
-      // 開発中は Service Worker を無効化（古いキャッシュで UI が更新されないのを防ぐ）
       devOptions: { enabled: false },
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
